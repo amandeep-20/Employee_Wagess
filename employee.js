@@ -1,11 +1,28 @@
-let present = 1;
-let absent = 0;
+const PART_TIME_HOURS = 4;
+const FULL_TIME_HOURS = 8;
+const WAGE_PER_HOUR = 20;
 
-let attend = Math.floor(Math.random()*2);
+let workType = Math.floor(Math.random() * 3);
+let dailyHours;
 
-if(attend==present){
-    console.log("present");
+switch (workType) {
+    case 0:
+        dailyHours = 0;
+        console.log("not work today.");
+        break;
+    case 1:
+        dailyHours = PART_TIME_HOURS;
+        console.log("part-time today.");
+        break;
+    case 2:
+        dailyHours = FULL_TIME_HOURS;
+        console.log("full-time today.");
+        break;
+    default:
+        console.log("Invalid work type.");
+        dailyHours = 0;
 }
-else{
-    console.log("absent");
-}
+
+const dailyWage = dailyHours * WAGE_PER_HOUR;
+console.log(`Daily Hours: ${dailyHours}`);
+console.log(`Daily Wage: $${dailyWage}`);
