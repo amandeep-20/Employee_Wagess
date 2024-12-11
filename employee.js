@@ -1,7 +1,8 @@
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-const WORKING_DAYS = 20;
+const MAX_WORKING_DAYS = 20;
+const MAX_WORKING_HOURS = 160;
 function getWorkHours(workType) {
     switch (workType) {
         case 0:
@@ -14,22 +15,28 @@ function getWorkHours(workType) {
             return 0;
     }
 }
-function calculateMonthlyWages() {
-    let totalWages = 0;
+function calculateConditionalWages() {
     let totalHours = 0;
+    let totalWages = 0;
+    let totalDays = 0;
 
-    for (let day = 1; day <= WORKING_DAYS; day++) {
+    while (totalHours < MAX_WORKING_HOURS && totalDays < MAX_WORKING_DAYS) {
         const workType = Math.floor(Math.random() * 3);
         const dailyHours = getWorkHours(workType);
+
+        if (totalHours + dailyHours > MAX_WORKING_HOURS) break;
+
         const dailyWage = dailyHours * WAGE_PER_HOUR;
 
         totalHours += dailyHours;
         totalWages += dailyWage;
+        totalDays++;
 
-        console.log(`Day ${day}: Worked ${dailyHours} hours, Earned $${dailyWage}`);
+        console.log(`Day ${totalDays}: Worked ${dailyHours} hours, Earned $${dailyWage}`);
     }
 
-    console.log(`\nTotal Hours Worked in the Month: ${totalHours}`);
-    console.log(`Total Wages for the Month: $${totalWages}`);
+    console.log(`Total Days Worked: ${totalDays}`);
+    console.log(`Total Hours Worked: ${totalHours}`);
+    console.log(`Total Wages Earned: $${totalWages}`);
 }
-calculateMonthlyWages();
+calculateConditionalWages();
