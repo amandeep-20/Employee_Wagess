@@ -1,28 +1,24 @@
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
 const WAGE_PER_HOUR = 20;
-
-let workType = Math.floor(Math.random() * 3);
-let dailyHours;
-
-switch (workType) {
-    case 0:
-        dailyHours = 0;
-        console.log("not work today.");
-        break;
-    case 1:
-        dailyHours = PART_TIME_HOURS;
-        console.log("part-time today.");
-        break;
-    case 2:
-        dailyHours = FULL_TIME_HOURS;
-        console.log("full-time today.");
-        break;
-    default:
-        console.log("Invalid work type.");
-        dailyHours = 0;
+function getWorkHours(workType) {
+    switch (workType) {
+        case 0:
+            return 0;
+        case 1:
+            return PART_TIME_HOURS;
+        case 2: 
+            return FULL_TIME_HOURS;
+        default:
+            console.log("Invalid work type.");
+            return 0;
+    }
 }
 
-const dailyWage = dailyHours * WAGE_PER_HOUR;
-console.log(`Daily Hours: ${dailyHours}`);
-console.log(`Daily Wage: $${dailyWage}`);
+const workType = Math.floor(Math.random() * 3);
+const dailyHours = getWorkHours(workType);
+if (dailyHours === 0) {
+    console.log("Employee did not work today.");
+} else {
+    console.log(`Employee worked ${dailyHours} hours today.`);
+}
